@@ -6,8 +6,11 @@
 package com.loctt.springbootthymeleaf.controller;
 
 import com.loctt.springbootthymeleaf.model.User;
+import com.loctt.springbootthymeleaf.model.UserTest;
+import com.loctt.springbootthymeleaf.repository.UserRepository;
 import java.util.Arrays;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,19 +21,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class HomeController {
+    @Autowired
+    private UserRepository userRepository;
+    
     @RequestMapping("/home")
     public String home(Model model) {
         model.addAttribute("arg", "cd");
         List<String> list = Arrays.asList("dasd", "bcsd", "dsadas");
         model.addAttribute("list", list);
-        model.addAttribute("user", new User("loc", 21));
+        model.addAttribute("user", new UserTest("loc", 21));
         
-        List<User> listUser = Arrays.asList(
-                new User("loc1", 10),
-                new User("loc2", 15),
-                new User("loc3", 23)
+        List<UserTest> listUser = Arrays.asList(new UserTest("loc1", 10),
+                new UserTest("loc2", 15),
+                new UserTest("loc3", 23)
         );
         model.addAttribute("userList", listUser);
+        
+//        for (User x : this.userRepository.findAll()) {
+//            System.out.println(x.getFullName());
+//        }
+        
         return "index";
+    }
+    
+    @RequestMapping("/adddasdsad")
+    public String add() {
+        User user = new User("loc", "loc1", "123", "ADMIN", true);
+        this.userRepository.save(user);
+        return "redirect:/home";
     }
 }

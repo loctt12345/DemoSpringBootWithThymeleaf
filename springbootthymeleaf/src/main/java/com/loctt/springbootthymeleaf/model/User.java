@@ -5,50 +5,107 @@
  */
 package com.loctt.springbootthymeleaf.model;
 
-import java.io.Serializable;
-
 /**
  *
  * @author loc12345
  */
-public class User implements Serializable{
-    private String name;
-    private int age;
 
-    public User(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tblUsers")
+public class User implements Serializable {
+    @Id
+    private String userID;
+    private String fullName;    
+    private String password;
+    private String roleID;
+    private boolean status;
 
     public User() {
     }
 
+    public User(String userID, String fullName, String password, String roleID, boolean status) {
+        this.userID = userID;
+        this.fullName = fullName;
+        this.password = password;
+        this.roleID = roleID;
+        this.status = status;
+    }
+    
+    
+
     /**
-     * @return the name
+     * @return the userID
      */
-    public String getName() {
-        return name;
+    public String getUserID() {
+        return userID;
     }
 
     /**
-     * @param name the name to set
+     * @param userID the userID to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     /**
-     * @return the age
+     * @return the fullName
      */
-    public int getAge() {
-        return age;
+    public String getFullName() {
+        return fullName;
     }
 
     /**
-     * @param age the age to set
+     * @param fullName the fullName to set
      */
-    public void setAge(int age) {
-        this.age = age;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @return the roleID
+     */
+    public String getRoleID() {
+        return roleID;
+    }
+
+    /**
+     * @param roleID the roleID to set
+     */
+    public void setRoleID(String roleID) {
+        this.roleID = roleID;
+    }
+
+    /**
+     * @return the status
+     */
+    public boolean isStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(boolean status) {
+        this.status = status;
     }
     
     
